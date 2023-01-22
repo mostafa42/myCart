@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class , "login_view"]);
 Route::post('/login' , [UserController::class , 'login']);
 Route::get('/admin/dashboard', [DashboardController::class , 'index']);
-Route::get('/admin/profile', [DashboardController::class , 'profile']);
+Route::get('/admin/profile', [DashboardController::class , 'profile'])->name('profile');
+Route::post('/admin/update-profile', [DashboardController::class , 'update_profile']);

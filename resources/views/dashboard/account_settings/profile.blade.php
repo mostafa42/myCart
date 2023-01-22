@@ -11,12 +11,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
+                @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success')}}
+                </div>
+                @endif
                 <h5 class="card-header">Profile Details</h5>
                 <!-- Account -->
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="{{asset('assets/assets/img/avatars/1.png')}}" alt="user-avatar" class="d-block rounded" height="100"
-                            width="100" id="uploadedAvatar" />
+                        <img src="{{asset('assets/assets/img/avatars/1.png')}}" alt="user-avatar"
+                            class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                         <div class="button-wrapper">
                             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload new photo</span>
@@ -34,28 +39,30 @@
                     </div>
                 </div>
                 <hr class="my-0" />
+                
                 <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
+                    <form id="formAccountSettings" method="POST" action="{{ url('admin/update-profile') }}">
+                        @csrf
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="firstName" class="form-label">Name</label>
-                                <input class="form-control" type="text" id="firstName" name="firstName" value="John"
-                                    autofocus />
+                                <input class="form-control" type="text" id="firstName" name="name"
+                                    value="{{$user->name}}" autofocus />
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input class="form-control" type="text" id="email" name="email"
-                                    value="john.doe@example.com" placeholder="john.doe@example.com" />
+                                <input class="form-control" type="text" id="email" name="email" value="{{$user->email}}"
+                                    placeholder="john.doe@example.com" />
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">Password</label>
                                 <input class="form-control" type="password" name="password"
-                                    value="john.doe@example.com" placeholder="john.doe@example.com" />
+                                    placeholder="************" />
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">Confirm password</label>
                                 <input class="form-control" type="password" name="confirm_password"
-                                    value="john.doe@example.com" placeholder="john.doe@example.com" />
+                                    placeholder="************" />
                             </div>
                         </div>
                         <div class="mt-2">
